@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {{>head}}
+</head>
+<body>
+    {{>nav}}
+	<!-- HERO -->
+	<section class="hero-section">
+		<div class="hero-slider owl-carousel">
+
+			{{#page.hero.slides}}
+			<div class="hs-item set-bg" data-setbg="{{img_background}}">
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-6 col-lg-7 text-white">
+							<span>Novi modeli</span>
+							<h2>{{header}}</h2>
+							<p>{{text}}</p>
+							<!-- <a href="#" class="site-btn sb-white">Dodaj u korpu</a> -->
+						</div>
+					</div>
+				</div>
+			</div>
+            {{/page.hero.slides}}
+
+		</div>
+	</section>
+
+	<!-- NAJNOVIJI PROIZVODI -->
+	<section class="top-letest-product-section">
+		<div class="container">
+			<div class="section-title">
+				<h2>NAJNOVIJI PROIZVODI</h2>
+			</div>
+			<div class="product-slider owl-carousel">
+				{{#shirts}}
+				
+				<div class="product-item">
+					<div class="pi-pic">
+						<a href="/shirt/{{slug}}">
+							<img src="{{{image}}}" alt="" height = "400">
+						</a>
+						<div class="pi-links">
+							<a href="./shirt/{{slug}}" class="add-card"><i class="flaticon-bag"></i><span href = "./shirt/{{slug}}">DETALJI</span></a>
+						</div>
+					</div>
+					<div class="pi-text">
+						<h6>{{price}}.00 RSD</h6>
+						<a href="/shirt/{{slug}}">
+							<p class="text-capitalize">{{name}}</p>
+						</a>
+					</div>
+				</div>
+			
+				{{/shirts}}
+			</div>
+		</div>
+	</section>
+
+
+
+	<!-- NAJPRODAVANIJI PROIZVODI -->
+	<section class="product-filter-section">
+		<div class="container">
+			<div class="section-title">
+				<h2>NAJPRODAVANIJI PROIZVODI</h2>
+			</div>
+			<div class="container">
+				<div class="row">
+						{{#shirts}}
+						<div class="col-lg-3 col-sm-6">
+							<div class="product-item">
+								<div class="pi-pic">
+									<a href="/shirt/{{slug}}">
+										<img src="{{{image}}}" alt="" height = "400">
+									</a>
+									<div class="pi-links">
+										<a href="/shirt/{{slug}}" class="add-card"><i class="flaticon-bag"></i><span href="/shirt/{{slug}}">DETALJI</span></a>
+									</div>
+								</div>
+								<div class="pi-text">
+									<h6>{{price}}.00 RSD</h6>
+									<a href="/shirt/{{slug}}">
+										<p>{{name}}</p>
+									</a>
+								</div>
+							</div>
+						</div>
+						{{/shirts}}
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+    {{>footer}}
+
+
+
+    {{>scripts}}
+
+	</body>
+</html>

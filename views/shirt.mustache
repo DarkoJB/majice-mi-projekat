@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {{>head}}
+</head>
+<body>
+    {{>nav}}
+
+
+
+	<!-- PROIZVOD -->
+	<section class="product-section">
+		<div class="container">
+
+			<div class="row">
+				<div class="col-lg-6">
+						<img class="product-big-img" src="{{{shirt.image}}}=s2048" alt="">
+					<div class="product-thumbs" tabindex="1" style="overflow: hidden; outline: none;">
+					    </div>
+				    </div>
+				<div class="col-lg-6 product-details">
+					<h2 class="p-title">{{shirt.name}}</h2>
+					<h3 class="p-price">{{shirt.price}}.00 RSD</h3>
+					
+					<div class="fw-size-choose">
+						<p>Veličine</p>
+						<div class="sc-item">
+							<input type="radio" name="sc" id="xs-size">
+							<label for="xs-size">S</label>
+						</div>
+						<div class="sc-item">
+							<input type="radio" name="sc" id="s-size">
+							<label for="s-size">M</label>
+						</div>
+						<div class="sc-item">
+							<input type="radio" name="sc" id="m-size" checked="">
+							<label for="m-size">L</label>
+						</div>
+					</div>
+
+					<div data-prod-id="{{shirt.id}}" id = "paypal-button"></div>
+					<div style="visibility: hidden;" id="loading-indicator">
+						<img src="/img/loading.gif"/>
+					</div>
+
+					<div id="accordion" class="accordion-area">
+						<div class="panel">
+							<div class="panel-header" id="headingOne">
+								<button class="panel-link active" data-toggle="collapse" data-target="#collapse1" aria-expanded="true" aria-controls="collapse1">informacije</button>
+							</div>
+							<div id="collapse1" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+								<div class="panel-body">
+									<p>{{shirt.description}}</p>
+
+								</div>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+
+
+
+
+         {{>footer}}
+
+
+
+        {{>scripts}}
+        <script type = "text/javascript" src = "https://www.paypal.com/sdk/js?client-id={{pp_client_id}}&disable-funding=credit"></script>
+        <script>
+            (function(){
+                console.log('LOAD PAYPAL BUTTON')
+                paypal.Buttons({
+                    style:{
+                        size: 'large',
+                        layout: 'horizontal',
+                        color: 'blue',
+                        shape: 'rect',
+                        label: 'checkout'
+                    },
+                    createOrder: function(data, actions){
+						$('#paypay-button').css('opacity', '0')
+						$('#loading-indicator').css('visibility', 'inherit')
+						
+
+						const shirtId = $('#paypal-button').attr('data-prod-id')
+						console.log('SHIRT ID == '+shirtId)
+                        return fetch('/order/create',{
+                            method: 'post',
+                            headers: {'Content-type':'/application/json'},
+							body: JSON.stringify({
+								shirtId: shirtId
+							})
+                        })
+                        .then(function(res){
+                            return res.json()
+                        })
+                        .then(function(data){
+                            return data.orderID
+                        })
+                    },
+					onCancel: function(){
+						//console.log('PURCHASE CANCELLED')
+						$('#paypay-button').css('opacity', '100')
+						$('#loading-indicator').css('visibility', 'hidden')
+					},
+                    onApprove: function(data, actions){
+						return actions.order.capture()
+						.then(function(details){
+							console.log('ORDER PROCESSED' + JSON.stringify(details))
+							const shirtId = $('#paypal-button').attr('data-prod-id')
+							return fetch('/order/complete',{
+                            	method: 'post',
+                            	headers: {'Content-type':'/application/json'},
+								body: JSON.stringify({
+									shirtId: shirtId,
+									paypalOrderId: details.id,
+									customerEmail: details.payer.email_address
+								})
+                        	})
+						})
+						.then(function(res){
+							return res.json()
+						})
+						.then(function(data){
+							console.log('ORDER COMPLETED')
+						})
+                    }
+                }).render('#paypal-button')
+            })()
+        </script>
+	</body>
+</html>

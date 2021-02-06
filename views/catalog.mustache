@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zxx">
+<head>
+    {{>head}}
+</head>
+<body>
+	{{>nav}}
+
+
+
+
+	<section class="product-filter-section">
+		<div class="container">
+			<div class="section-title">
+			<br>
+				<h2>KATALOG</h2>
+			</div>
+			<div class="container">
+				<div class="row">
+						{{#shirts}}
+						<div class="col-lg-3 col-sm-6">
+							<div class="product-item">
+								<div class="pi-pic">
+									<a href="/shirt/{{slug}}">
+										<img src="{{{image}}}" alt="" height = "400">
+									</a>
+									<div class="pi-links">
+										<a href="./shirt/{{slug}}" class="add-card"><i class="flaticon-bag"></i><span href="./shirt/{{slug}}">DETALJI</span></a>
+									</div>
+								</div>
+								<div class="pi-text">
+									<h6>{{price}}.00 RSD</h6>
+									<a href="/shirt/{{slug}}">
+										<p>{{name}}</p>
+									</a>
+								</div>
+							</div>
+						</div>
+						{{/shirts}}
+				</div>
+			</div>
+		</div>
+	</section>
+
+
+{{>footer}}
+
+
+{{>scripts}}
+
+	</body>
+</html>

@@ -1,0 +1,26 @@
+{
+    "hero": {
+        "slides": [
+            {
+                "img_background": "/img/bg-images/1.jpg",
+                "header": "Sparta",
+                "text": "Dobro došli na online butik Majice Mi! Pogledajte naš asortiman jedinstvenih dizajna odeće. Ako imate posebnu želju za print na odeći, molimo Vas da nas kontaktirate na: darkojbozic@gmail.com "
+            },
+            {
+                "img_background": "/img/bg-images/2.jpg",
+                "header": "Hard Rock",
+                "text": "Dobro došli na online butik Majice Mi! Pogledajte naš asortiman jedinstvenih dizajna odeće. Ako imate posebnu želju za print na odeći, molimo Vas da nas kontaktirate na: darkojbozic@gmail.com "
+            },
+            {
+                "img_background": "/img/bg-images/3.jpg",
+                "header": "Grey Hound",
+                "text": "Dobro došli na online butik Majice Mi! Pogledajte naš asortiman jedinstvenih dizajna odeće. Ako imate posebnu želju za print na odeći, molimo Vas da nas kontaktirate na: darkojbozic@gmail.com "
+            },
+            {
+                "img_background": "/img/bg-images/4.jpg",
+                "header": "Undefeated",
+                "text": "Dobro došli na online butik Majice Mi! Pogledajte naš asortiman jedinstvenih dizajna odeće. Ako imate posebnu želju za print na odeći, molimo Vas da nas kontaktirate na: darkojbozic@gmail.com "
+            }
+        ]
+    }
+}
